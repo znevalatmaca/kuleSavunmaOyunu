@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             panel1 = new Panel();
             lblSkor = new Label();
             lblDalga = new Label();
@@ -52,7 +53,7 @@
             // 
             // panel1
             // 
-            panel1.BackColor = Color.HotPink;
+            panel1.BackColor = Color.Salmon;
             panel1.Controls.Add(lblSkor);
             panel1.Controls.Add(lblDalga);
             panel1.Controls.Add(lblCan);
@@ -60,7 +61,7 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(978, 150);
+            panel1.Size = new Size(963, 103);
             panel1.TabIndex = 0;
             // 
             // lblSkor
@@ -68,7 +69,7 @@
             lblSkor.AutoSize = true;
             lblSkor.Font = new Font("OCR A Extended", 14F);
             lblSkor.ForeColor = Color.DarkBlue;
-            lblSkor.Location = new Point(696, 22);
+            lblSkor.Location = new Point(766, 32);
             lblSkor.Name = "lblSkor";
             lblSkor.Size = new Size(115, 30);
             lblSkor.TabIndex = 3;
@@ -79,7 +80,7 @@
             lblDalga.AutoSize = true;
             lblDalga.Font = new Font("OCR A Extended", 14F);
             lblDalga.ForeColor = Color.DarkBlue;
-            lblDalga.Location = new Point(436, 22);
+            lblDalga.Location = new Point(506, 32);
             lblDalga.Name = "lblDalga";
             lblDalga.Size = new Size(166, 30);
             lblDalga.TabIndex = 2;
@@ -91,7 +92,7 @@
             lblCan.AutoSize = true;
             lblCan.Font = new Font("OCR A Extended", 14F);
             lblCan.ForeColor = Color.Gold;
-            lblCan.Location = new Point(251, 22);
+            lblCan.Location = new Point(321, 32);
             lblCan.Name = "lblCan";
             lblCan.Size = new Size(115, 30);
             lblCan.TabIndex = 1;
@@ -102,7 +103,7 @@
             lblAltin.AutoSize = true;
             lblAltin.Font = new Font("OCR A Extended", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblAltin.ForeColor = Color.Gold;
-            lblAltin.Location = new Point(12, 22);
+            lblAltin.Location = new Point(82, 32);
             lblAltin.Name = "lblAltin";
             lblAltin.Size = new Size(166, 30);
             lblAltin.TabIndex = 0;
@@ -110,21 +111,22 @@
             // 
             // panel2
             // 
+            panel2.BackColor = Color.HotPink;
             panel2.Controls.Add(btnBuyuKulesi);
             panel2.Controls.Add(btnTopKulesi);
             panel2.Controls.Add(btnOkKulesi);
             panel2.Dock = DockStyle.Bottom;
             panel2.ForeColor = Color.Cornsilk;
-            panel2.Location = new Point(0, 565);
+            panel2.Location = new Point(0, 473);
             panel2.Name = "panel2";
-            panel2.Size = new Size(978, 179);
+            panel2.Size = new Size(963, 128);
             panel2.TabIndex = 1;
             // 
             // btnBuyuKulesi
             // 
             btnBuyuKulesi.BackColor = Color.Purple;
             btnBuyuKulesi.Font = new Font("Tahoma", 12F, FontStyle.Bold);
-            btnBuyuKulesi.Location = new Point(555, 76);
+            btnBuyuKulesi.Location = new Point(549, 56);
             btnBuyuKulesi.Name = "btnBuyuKulesi";
             btnBuyuKulesi.Size = new Size(278, 34);
             btnBuyuKulesi.TabIndex = 2;
@@ -136,7 +138,7 @@
             // 
             btnTopKulesi.BackColor = Color.Orange;
             btnTopKulesi.Font = new Font("Tahoma", 12F, FontStyle.Bold);
-            btnTopKulesi.Location = new Point(284, 76);
+            btnTopKulesi.Location = new Point(278, 56);
             btnTopKulesi.Name = "btnTopKulesi";
             btnTopKulesi.Size = new Size(251, 34);
             btnTopKulesi.TabIndex = 1;
@@ -149,7 +151,7 @@
             btnOkKulesi.BackColor = Color.White;
             btnOkKulesi.Font = new Font("Tahoma", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
             btnOkKulesi.ForeColor = Color.RoyalBlue;
-            btnOkKulesi.Location = new Point(24, 76);
+            btnOkKulesi.Location = new Point(-2, 56);
             btnOkKulesi.Name = "btnOkKulesi";
             btnOkKulesi.Size = new Size(238, 34);
             btnOkKulesi.TabIndex = 0;
@@ -159,40 +161,45 @@
             // 
             // pnlYol1
             // 
-            pnlYol1.BackColor = Color.DarkOliveGreen;
-            pnlYol1.Location = new Point(2, 392);
+            pnlYol1.BackColor = Color.DarkGray;
+            pnlYol1.BackgroundImage = (Image)resources.GetObject("pnlYol1.BackgroundImage");
+            pnlYol1.Location = new Point(3, 412);
             pnlYol1.Name = "pnlYol1";
             pnlYol1.Size = new Size(162, 36);
             pnlYol1.TabIndex = 2;
             // 
             // pnlYol3
             // 
-            pnlYol3.BackColor = Color.DarkOliveGreen;
-            pnlYol3.Location = new Point(208, 252);
+            pnlYol3.BackColor = Color.DarkGray;
+            pnlYol3.BackgroundImage = (Image)resources.GetObject("pnlYol3.BackgroundImage");
+            pnlYol3.Location = new Point(209, 272);
             pnlYol3.Name = "pnlYol3";
             pnlYol3.Size = new Size(534, 36);
             pnlYol3.TabIndex = 4;
             // 
             // pnlYol4
             // 
-            pnlYol4.BackColor = Color.DarkOliveGreen;
-            pnlYol4.Location = new Point(699, 285);
+            pnlYol4.BackColor = Color.DarkGray;
+            pnlYol4.BackgroundImage = (Image)resources.GetObject("pnlYol4.BackgroundImage");
+            pnlYol4.Location = new Point(700, 305);
             pnlYol4.Name = "pnlYol4";
             pnlYol4.Size = new Size(43, 143);
             pnlYol4.TabIndex = 5;
             // 
             // pnlYol5
             // 
-            pnlYol5.BackColor = Color.DarkOliveGreen;
-            pnlYol5.Location = new Point(740, 395);
+            pnlYol5.BackColor = Color.DarkGray;
+            pnlYol5.BackgroundImage = (Image)resources.GetObject("pnlYol5.BackgroundImage");
+            pnlYol5.Location = new Point(742, 415);
             pnlYol5.Name = "pnlYol5";
-            pnlYol5.Size = new Size(178, 33);
+            pnlYol5.Size = new Size(185, 33);
             pnlYol5.TabIndex = 6;
             // 
             // pnlBitis
             // 
-            pnlBitis.BackColor = Color.DarkOliveGreen;
-            pnlBitis.Location = new Point(918, 395);
+            pnlBitis.BackColor = Color.DarkGray;
+            pnlBitis.BackgroundImage = (Image)resources.GetObject("pnlBitis.BackgroundImage");
+            pnlBitis.Location = new Point(919, 415);
             pnlBitis.Name = "pnlBitis";
             pnlBitis.Size = new Size(60, 33);
             pnlBitis.TabIndex = 7;
@@ -204,16 +211,18 @@
             // 
             // pnlYol2
             // 
-            pnlYol2.BackColor = Color.DarkOliveGreen;
-            pnlYol2.Location = new Point(163, 252);
+            pnlYol2.BackColor = Color.DarkGray;
+            pnlYol2.BackgroundImage = (Image)resources.GetObject("pnlYol2.BackgroundImage");
+            pnlYol2.Location = new Point(164, 272);
             pnlYol2.Name = "pnlYol2";
             pnlYol2.Size = new Size(46, 143);
             pnlYol2.TabIndex = 8;
             // 
             // pnlYol6
             // 
-            pnlYol6.BackColor = Color.DarkOliveGreen;
-            pnlYol6.Location = new Point(163, 392);
+            pnlYol6.BackColor = Color.DarkGray;
+            pnlYol6.BackgroundImage = (Image)resources.GetObject("pnlYol6.BackgroundImage");
+            pnlYol6.Location = new Point(164, 412);
             pnlYol6.Name = "pnlYol6";
             pnlYol6.Size = new Size(46, 36);
             pnlYol6.TabIndex = 9;
@@ -223,10 +232,12 @@
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Gray;
-            ClientSize = new Size(978, 744);
+            BackgroundImage = Properties.Resources.arkaplan;
+            BackgroundImageLayout = ImageLayout.Stretch;
+            ClientSize = new Size(963, 601);
+            Controls.Add(pnlYol5);
             Controls.Add(pnlBitis);
             Controls.Add(pnlYol6);
-            Controls.Add(pnlYol5);
             Controls.Add(pnlYol4);
             Controls.Add(pnlYol3);
             Controls.Add(pnlYol1);

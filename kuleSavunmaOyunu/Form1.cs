@@ -10,7 +10,13 @@ namespace kuleSavunmaOyunu
 
         int dalgaSayisi = 0;
 
-        int oyuncuAltin = 500;
+        int dalgaSeviyesi = 1;
+        int oldurulenDusmanSayisi = 0;
+        int dalgaHedefi = 5;
+
+        int oyuncuCan = 20;
+
+        int oyuncuAltin = 1000;
 
         string seciliKuleTuru = "";
 
@@ -37,55 +43,69 @@ namespace kuleSavunmaOyunu
 
         private void tmrOyun_Tick(object sender, EventArgs e)
         {
+            // 1. DÜÞMAN YARATMA (SPAWN)
             Random rnd = new Random();
-
             if (rnd.Next(0, 100) < 2)
             {
                 DusmanYarat();
             }
 
-            for (int i = dusmanlar.Count - 1; i >= 0; i--)
-            {
-                Dusman d = dusmanlar[i];
-
-                Panel hedefYol = yolListesi[d.YolAdimi];
-
-
-
-                if (d.Gorsel.Left < hedefYol.Left) d.Gorsel.Left += d.Hiz;
-                if (d.Gorsel.Left > hedefYol.Left) d.Gorsel.Left -= d.Hiz;
-                if (d.Gorsel.Top < hedefYol.Top) d.Gorsel.Top += d.Hiz;
-                if (d.Gorsel.Top > hedefYol.Top) d.Gorsel.Top -= d.Hiz;
-
-                if (Math.Abs(d.Gorsel.Left - hedefYol.Left) < 10 && Math.Abs(d.Gorsel.Top - hedefYol.Top) < 10)
-                {
-                    d.YolAdimi++;
-
-                    if (d.YolAdimi >= yolListesi.Count)
-                    {
-                        this.Controls.Remove(d.Gorsel);
-                        dusmanlar.Remove(d);
-                    }
-                }
-            }
-
+            // 2. KULELER SALDIRSIN
             foreach (Kule k in kulelerim)
             {
                 k.Saldir(dusmanlar);
             }
 
-            for(int i = dusmanlar.Count - 1; i >= 0; i--)
+            
+            for (int i = dusmanlar.Count - 1; i >= 0; i--)
             {
-                if (dusmanlar[i].Can <= 0)
+                Dusman d = dusmanlar[i]; 
+                Panel hedefYol = yolListesi[d.YolAdimi];
+
+               
+                if (d.Gorsel.Left < hedefYol.Left) d.Gorsel.Left += d.Hiz;
+                if (d.Gorsel.Left > hedefYol.Left) d.Gorsel.Left -= d.Hiz;
+                if (d.Gorsel.Top < hedefYol.Top) d.Gorsel.Top += d.Hiz;
+                if (d.Gorsel.Top > hedefYol.Top) d.Gorsel.Top -= d.Hiz;
+
+         
+                if (Math.Abs(d.Gorsel.Left - hedefYol.Left) < 10 && Math.Abs(d.Gorsel.Top - hedefYol.Top) < 10)
                 {
-                    this.Controls.Remove(dusmanlar[i].Gorsel);
+                    d.YolAdimi++;
 
-                    oyuncuAltin += dusmanlar[i].Odul;
+               
+                    if (d.YolAdimi >= yolListesi.Count)
+                    {
+                        oyuncuCan -= 1;
+                        if (lblCan != null) lblCan.Text = "Can: " + oyuncuCan;
 
-                    if (lblAltin != null) lblAltin.Text = "Altýn:" + oyuncuAltin;
+                        this.Controls.Remove(d.Gorsel); 
+                        dusmanlar.RemoveAt(i);          
 
+                        if (oyuncuCan <= 0)
+                        {
+                            tmrOyun.Stop();
+                            MessageBox.Show("OYUN BÝTTÝ! Kaybettin.");
+                            this.Close();
+                        }
+
+                        continue; 
+                    }
+                }
+                
+                if (d.Can <= 0)
+                {                  
+                    oyuncuAltin += d.Odul;
+                    if (lblAltin != null) lblAltin.Text = "Altýn: " + oyuncuAltin;
+              
+                    this.Controls.Remove(d.Gorsel);             
                     dusmanlar.RemoveAt(i);
+                    oldurulenDusmanSayisi++;
 
+                    if (oldurulenDusmanSayisi >= dalgaHedefi)
+                    {
+                        DalgaAtla();
+                    }
                 }
             }
         }
@@ -101,9 +121,17 @@ namespace kuleSavunmaOyunu
 
             this.Controls.Add(resim);
             resim.BringToFront();
+            
+            int yeniCan = 100 + (dalgaSeviyesi * 20);
+            int yeniOdul=10+ (dalgaSeviyesi * 2);
 
-            Dusman yeniDusman = new Dusman(100, 5, 10, resim);
+           Dusman yeniDusman = new Dusman(yeniCan, 5, yeniOdul, resim);
             dusmanlar.Add(yeniDusman);
+
+         
+            
+
+
         }
 
         private void btnOkKulesi_Click(object sender, EventArgs e)
@@ -132,16 +160,18 @@ namespace kuleSavunmaOyunu
             PictureBox kuleResmi=new PictureBox();
             kuleResmi.Size=new Size(40,40);
             kuleResmi.SizeMode=PictureBoxSizeMode.StretchImage;
+            kuleResmi.BackColor = Color.Transparent;
+            
+
             kuleResmi.Left = e.X - 20;
             kuleResmi.Top = e.Y - 20;
 
             Kule yeniKule = null;
-
            
 
             if (seciliKuleTuru == "Ok" && oyuncuAltin >= 100)
             {
-                kuleResmi.BackColor = Color.White;
+                kuleResmi.Image = Properties.Resources
                 yeniKule = new OkKulesi(kuleResmi);
                 oyuncuAltin -= 100;
 
@@ -153,11 +183,11 @@ namespace kuleSavunmaOyunu
                 yeniKule = new TopKulesi(kuleResmi);
                 oyuncuAltin -= 250;
             }
-             else if(seciliKuleTuru=="Buyu" && oyuncuAltin>=400)
+             else if(seciliKuleTuru=="Buyu" && oyuncuAltin>=200)
             {
                 kuleResmi.BackColor = Color.Purple;
                 yeniKule = new BuyuKulesi(kuleResmi);
-                oyuncuAltin -= 400;
+                oyuncuAltin -= 200;
             }
 
             if (yeniKule != null)
@@ -180,6 +210,20 @@ namespace kuleSavunmaOyunu
             }
 
 
+
+        }
+
+        private void DalgaAtla()
+        {
+            dalgaSeviyesi++;
+            oldurulenDusmanSayisi = 0;
+            dalgaHedefi += 3;
+
+            if(lblDalga!=null) lblDalga.Text="Dalga:" + dalgaSeviyesi;
+
+            tmrOyun.Stop();
+            MessageBox.Show(dalgaSeviyesi + ". Dalga Baþlýyor!");
+            tmrOyun.Start();
 
         }
     }
