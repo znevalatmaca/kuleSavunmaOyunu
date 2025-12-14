@@ -1,5 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
+using System;
+using System.Collections.Generic;   
 
 namespace kuleSavunmaOyunu
 {
@@ -9,7 +11,7 @@ namespace kuleSavunmaOyunu
         {
         }
 
-        public override void Saldir()
+        public override void Saldir(List<Dusman> dusmanlar)
         {
             
         }

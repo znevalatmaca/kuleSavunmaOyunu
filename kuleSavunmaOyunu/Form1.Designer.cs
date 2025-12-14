@@ -39,11 +39,13 @@
             btnTopKulesi = new Button();
             btnOkKulesi = new Button();
             pnlYol1 = new Panel();
-            pnlYol2 = new Panel();
             pnlYol3 = new Panel();
             pnlYol4 = new Panel();
             pnlYol5 = new Panel();
+            pnlBitis = new Panel();
             tmrOyun = new System.Windows.Forms.Timer(components);
+            pnlYol2 = new Panel();
+            pnlYol6 = new Panel();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
@@ -128,6 +130,7 @@
             btnBuyuKulesi.TabIndex = 2;
             btnBuyuKulesi.Text = "Büyü Kulesi(200tl)";
             btnBuyuKulesi.UseVisualStyleBackColor = false;
+            btnBuyuKulesi.Click += btnBuyuKulesi_Click;
             // 
             // btnTopKulesi
             // 
@@ -139,6 +142,7 @@
             btnTopKulesi.TabIndex = 1;
             btnTopKulesi.Text = "Top Kulesi(250tl)";
             btnTopKulesi.UseVisualStyleBackColor = false;
+            btnTopKulesi.Click += btnTopKulesi_Click;
             // 
             // btnOkKulesi
             // 
@@ -151,51 +155,68 @@
             btnOkKulesi.TabIndex = 0;
             btnOkKulesi.Text = "Ok Kulesi(100tl)";
             btnOkKulesi.UseVisualStyleBackColor = false;
+            btnOkKulesi.Click += btnOkKulesi_Click;
             // 
             // pnlYol1
             // 
             pnlYol1.BackColor = Color.DarkOliveGreen;
-            pnlYol1.Location = new Point(2, 277);
+            pnlYol1.Location = new Point(2, 392);
             pnlYol1.Name = "pnlYol1";
-            pnlYol1.Size = new Size(245, 36);
+            pnlYol1.Size = new Size(162, 36);
             pnlYol1.TabIndex = 2;
-            // 
-            // pnlYol2
-            // 
-            pnlYol2.BackColor = Color.DarkOliveGreen;
-            pnlYol2.Location = new Point(204, 312);
-            pnlYol2.Name = "pnlYol2";
-            pnlYol2.Size = new Size(43, 179);
-            pnlYol2.TabIndex = 3;
             // 
             // pnlYol3
             // 
             pnlYol3.BackColor = Color.DarkOliveGreen;
-            pnlYol3.Location = new Point(245, 455);
+            pnlYol3.Location = new Point(208, 252);
             pnlYol3.Name = "pnlYol3";
-            pnlYol3.Size = new Size(376, 36);
+            pnlYol3.Size = new Size(534, 36);
             pnlYol3.TabIndex = 4;
             // 
             // pnlYol4
             // 
             pnlYol4.BackColor = Color.DarkOliveGreen;
-            pnlYol4.Location = new Point(578, 277);
+            pnlYol4.Location = new Point(699, 285);
             pnlYol4.Name = "pnlYol4";
-            pnlYol4.Size = new Size(43, 179);
+            pnlYol4.Size = new Size(43, 143);
             pnlYol4.TabIndex = 5;
             // 
             // pnlYol5
             // 
             pnlYol5.BackColor = Color.DarkOliveGreen;
-            pnlYol5.Location = new Point(617, 277);
+            pnlYol5.Location = new Point(740, 395);
             pnlYol5.Name = "pnlYol5";
-            pnlYol5.Size = new Size(361, 36);
+            pnlYol5.Size = new Size(178, 33);
             pnlYol5.TabIndex = 6;
+            // 
+            // pnlBitis
+            // 
+            pnlBitis.BackColor = Color.DarkOliveGreen;
+            pnlBitis.Location = new Point(918, 395);
+            pnlBitis.Name = "pnlBitis";
+            pnlBitis.Size = new Size(60, 33);
+            pnlBitis.TabIndex = 7;
             // 
             // tmrOyun
             // 
             tmrOyun.Interval = 50;
             tmrOyun.Tick += tmrOyun_Tick;
+            // 
+            // pnlYol2
+            // 
+            pnlYol2.BackColor = Color.DarkOliveGreen;
+            pnlYol2.Location = new Point(163, 252);
+            pnlYol2.Name = "pnlYol2";
+            pnlYol2.Size = new Size(46, 143);
+            pnlYol2.TabIndex = 8;
+            // 
+            // pnlYol6
+            // 
+            pnlYol6.BackColor = Color.DarkOliveGreen;
+            pnlYol6.Location = new Point(163, 392);
+            pnlYol6.Name = "pnlYol6";
+            pnlYol6.Size = new Size(46, 36);
+            pnlYol6.TabIndex = 9;
             // 
             // Form1
             // 
@@ -203,17 +224,20 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Gray;
             ClientSize = new Size(978, 744);
+            Controls.Add(pnlBitis);
+            Controls.Add(pnlYol6);
             Controls.Add(pnlYol5);
             Controls.Add(pnlYol4);
             Controls.Add(pnlYol3);
-            Controls.Add(pnlYol2);
             Controls.Add(pnlYol1);
             Controls.Add(panel2);
             Controls.Add(panel1);
+            Controls.Add(pnlYol2);
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "kuleSavunmaOyunu";
             Load += Form1_Load;
+            MouseClick += Form1_MouseClick;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
@@ -232,10 +256,12 @@
         private Button btnTopKulesi;
         private Button btnOkKulesi;
         private Panel pnlYol1;
-        private Panel pnlYol2;
         private Panel pnlYol3;
         private Panel pnlYol4;
         private Panel pnlYol5;
         private System.Windows.Forms.Timer tmrOyun;
+        private Panel pnlBitis;
+        private Panel pnlYol2;
+        private Panel pnlYol6;
     }
 }

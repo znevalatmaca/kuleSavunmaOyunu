@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace kuleSavunmaOyunu
 {
@@ -40,6 +41,6 @@ namespace kuleSavunmaOyunu
             this.Gorsel = gorsel;
         }
 
-        public abstract void Saldir();
+        public abstract void Saldir(List<Dusman>dusmanlar);
     }
 }

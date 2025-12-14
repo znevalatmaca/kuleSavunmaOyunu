@@ -1,7 +1,9 @@
-﻿namespace kuleSavunmaOyunu
+﻿using System.Collections.Generic;
+
+namespace kuleSavunmaOyunu
 {
     public interface ISaldirabilir 
     {
-        void Saldir();
+        void Saldir(List<Dusman>dusmanlar);
     }
 }
