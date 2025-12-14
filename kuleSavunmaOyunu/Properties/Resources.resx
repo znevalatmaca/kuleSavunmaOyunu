@@ -121,4 +121,25 @@
   <data name="arkaplan" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\3149805.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="dusman1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dusman.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dusman2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dusman2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dusman4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dusman4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="interface2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\interface2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kule_buyu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\kule_buyu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kule_ok" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\kule_ok.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kule_top" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\kule_top.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

@@ -9,6 +9,8 @@ namespace kuleSavunmaOyunu
         List<Dusman> dusmanlar = new List<Dusman>();
 
         int dalgaSayisi = 0;
+        int toplamDalga = 5;
+        int oyuncuSkor = 0;
 
         int dalgaSeviyesi = 1;
         int oldurulenDusmanSayisi = 0;
@@ -38,6 +40,8 @@ namespace kuleSavunmaOyunu
             yolListesi.Add(pnlBitis);
 
             tmrOyun.Start();
+
+           
 
         }
 
@@ -97,7 +101,11 @@ namespace kuleSavunmaOyunu
                 {                  
                     oyuncuAltin += d.Odul;
                     if (lblAltin != null) lblAltin.Text = "Altýn: " + oyuncuAltin;
-              
+
+                    oyuncuSkor += 10;
+
+                    if(lblSkor!=null) lblSkor.Text="Skor: " + oyuncuSkor;
+
                     this.Controls.Remove(d.Gorsel);             
                     dusmanlar.RemoveAt(i);
                     oldurulenDusmanSayisi++;
@@ -112,14 +120,17 @@ namespace kuleSavunmaOyunu
         private void DusmanYarat()
         {
             PictureBox resim = new PictureBox();
-            resim.BackColor = Color.Red;
-            resim.Size = new Size(30, 30);
+            resim.BackColor = Color.Transparent;
+            resim.Image=Properties.Resources.dusman4;
+
+            resim.Size = new Size(40, 40);
             resim.SizeMode = PictureBoxSizeMode.StretchImage;
 
             resim.Left = yolListesi[0].Left;
             resim.Top = yolListesi[0].Top;
 
             this.Controls.Add(resim);
+            resim.Parent = this;
             resim.BringToFront();
             
             int yeniCan = 100 + (dalgaSeviyesi * 20);
@@ -158,7 +169,7 @@ namespace kuleSavunmaOyunu
             if (seciliKuleTuru == "") return;
 
             PictureBox kuleResmi=new PictureBox();
-            kuleResmi.Size=new Size(40,40);
+            kuleResmi.Size=new Size(60,60);
             kuleResmi.SizeMode=PictureBoxSizeMode.StretchImage;
             kuleResmi.BackColor = Color.Transparent;
             
@@ -171,7 +182,7 @@ namespace kuleSavunmaOyunu
 
             if (seciliKuleTuru == "Ok" && oyuncuAltin >= 100)
             {
-                kuleResmi.Image = Properties.Resources
+                kuleResmi.Image = Properties.Resources.kule_ok;
                 yeniKule = new OkKulesi(kuleResmi);
                 oyuncuAltin -= 100;
 
@@ -179,13 +190,13 @@ namespace kuleSavunmaOyunu
             
                 else if (seciliKuleTuru == "Top" && oyuncuAltin >= 250)
             {
-                kuleResmi.BackColor = Color.Orange;
+                kuleResmi.Image = Properties.Resources.kule_top;
                 yeniKule = new TopKulesi(kuleResmi);
                 oyuncuAltin -= 250;
             }
              else if(seciliKuleTuru=="Buyu" && oyuncuAltin>=200)
             {
-                kuleResmi.BackColor = Color.Purple;
+                kuleResmi.Image = Properties.Resources.kule_buyu;
                 yeniKule = new BuyuKulesi(kuleResmi);
                 oyuncuAltin -= 200;
             }
@@ -215,14 +226,22 @@ namespace kuleSavunmaOyunu
 
         private void DalgaAtla()
         {
+
+            if(dalgaSeviyesi>=toplamDalga)
+            {
+                tmrOyun.Stop();
+                MessageBox.Show("Tebrikler! Tüm Dalgalarý Geçtiniz!");
+                Application.Restart();
+                return;
+            }
             dalgaSeviyesi++;
             oldurulenDusmanSayisi = 0;
-            dalgaHedefi += 3;
+            dalgaHedefi += 5;
 
-            if(lblDalga!=null) lblDalga.Text="Dalga:" + dalgaSeviyesi;
+            if(lblDalga!=null) lblDalga.Text="Dalga:" + dalgaSeviyesi+ "/" +toplamDalga;
 
             tmrOyun.Stop();
-            MessageBox.Show(dalgaSeviyesi + ". Dalga Baþlýyor!");
+            MessageBox.Show(dalgaSeviyesi + ". Dalga Baþlýyor!Düþmanlar güçlendi.");
             tmrOyun.Start();
 
         }
