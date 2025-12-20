@@ -6,28 +6,40 @@ using System.Windows.Forms;
 
 namespace kuleSavunmaOyunu
 {
-    public class BuyuKulesi : Kule,ISaldirabilir
+    public class BuyuKulesi : Kule,ISaldirabilir,IYukseltilebilir
     {
 
         private  DateTime sonSaldiriZamani = DateTime.Now;
+        public int Seviye { get; set; } = 1;
         public BuyuKulesi(PictureBox gorsel) : base(200,130,25,gorsel)
         {
           
         }
-
+        public void Yukselt()
+        {
+            this.Seviye++;
+            this.Hasar += 15;
+            this.Menzil += 30;
+            this.Gorsel.Width += 5;
+            this.Gorsel.Height += 5;
+        }
         public override void Saldir(List<Dusman> dusmanlar)
         {
-            if ((DateTime.Now - sonSaldiriZamani).TotalSeconds < 1.5) return; 
+            if ((DateTime.Now - sonSaldiriZamani).TotalSeconds < 1.5) return;
+
+            double menzilKaresi = this.Menzil * this.Menzil;
 
             
             List<Dusman> menzildekiler = new List<Dusman>();
 
             foreach (Dusman d in dusmanlar)
             {
-                double mesafe = Math.Sqrt(Math.Pow(this.Gorsel.Left - d.Gorsel.Left, 2) +
-                                          Math.Pow(this.Gorsel.Top - d.Gorsel.Top, 2));
+                double farkX = this.Gorsel.Left - d.Gorsel.Left;
+                double farkY = this.Gorsel.Top - d.Gorsel.Top;
+                double mesafeKaresi = (farkX * farkX) + (farkY * farkY);
 
-                if (mesafe <= this.Menzil)
+
+                if (mesafeKaresi <= menzilKaresi)
                 {
                     menzildekiler.Add(d);
                 }

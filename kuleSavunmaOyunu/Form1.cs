@@ -8,6 +8,7 @@ namespace kuleSavunmaOyunu
         List<Panel> yolListesi = new List<Panel>();
         List<Dusman> dusmanlar = new List<Dusman>();
 
+        int donguSayaci = 0;
         int dalgaSayisi = 0;
         int toplamDalga = 5;
         int oyuncuSkor = 0;
@@ -18,7 +19,7 @@ namespace kuleSavunmaOyunu
 
         int oyuncuCan = 20;
 
-        int oyuncuAltin = 1000;
+        int oyuncuAltin = 800;
 
         string seciliKuleTuru = "";
 
@@ -30,6 +31,8 @@ namespace kuleSavunmaOyunu
 
         private void Form1_Load(object sender, EventArgs e)
         {
+           
+            
             yolListesi.Add(pnlYol1);
             yolListesi.Add(pnlYol6);
             yolListesi.Add(pnlYol2);
@@ -47,14 +50,16 @@ namespace kuleSavunmaOyunu
 
         private void tmrOyun_Tick(object sender, EventArgs e)
         {
-            // 1. DÜÞMAN YARATMA (SPAWN)
+            donguSayaci++;
+         
+            
             Random rnd = new Random();
             if (rnd.Next(0, 100) < 2)
             {
                 DusmanYarat();
             }
 
-            // 2. KULELER SALDIRSIN
+            
             foreach (Kule k in kulelerim)
             {
                 k.Saldir(dusmanlar);
@@ -113,6 +118,17 @@ namespace kuleSavunmaOyunu
                     if (oldurulenDusmanSayisi >= dalgaHedefi)
                     {
                         DalgaAtla();
+                    }
+                }
+            }
+
+            if (donguSayaci%5==0)
+            {
+                foreach(var kule in kulelerim)
+                {
+                    if (kule is ISaldirabilir saldiranKule)
+                    {
+                        saldiranKule.Saldir(dusmanlar);
                     }
                 }
             }
@@ -202,12 +218,12 @@ namespace kuleSavunmaOyunu
             }
 
             if (yeniKule != null)
-            {
+            { 
                 this.Controls.Add(kuleResmi);
                 kuleResmi.BringToFront();
                 kulelerim.Add(yeniKule);
 
-                lblAltin.Text= "Altýn: " + oyuncuAltin.ToString();
+                lblAltin.Text= " Altýn: " + oyuncuAltin.ToString();
 
                 seciliKuleTuru = "";
                 this.Cursor = Cursors.Default;

@@ -5,30 +5,45 @@ using System.Windows.Forms;
 
 namespace kuleSavunmaOyunu
 {
-    public class OkKulesi : Kule, ISaldirabilir
+    public class OkKulesi : Kule, ISaldirabilir,IYukseltilebilir
     {
 
         private DateTime sonSaldiriZamani = DateTime.Now;
+
+        public int Seviye { get; set; } = 1;
         public OkKulesi(PictureBox gorsel) : base(100, 150, 15, gorsel)
         {
 
         }
 
+        public void Yukselt()
+        {
+            this.Seviye++;
+            this.Hasar += 10;
+            this.Menzil += 20;
+            this.Gorsel.Width += 5;
+            this.Gorsel.Height += 5;
+
+        }
+
         public override void Saldir(List<Dusman> dusmanlar)
         {
-            if ((DateTime.Now- sonSaldiriZamani).TotalSeconds < 1)
+            if ((DateTime.Now- sonSaldiriZamani).TotalSeconds < 1.0)
                 return;
 
             Dusman enYakinDusman = null;
-            double enKisaMesafe= double.MaxValue;
-            
+            double enKisaMesafeKaresi= double.MaxValue;
+            double menzilKaresi = this.Menzil * this.Menzil;
+
             foreach(Dusman d in dusmanlar)
             {
-                double mesafe = Math.Sqrt(Math.Pow(this.Gorsel.Left - d.Gorsel.Left, 2) + Math.Pow(this.Gorsel.Top - d.Gorsel.Top, 2));
+                double farkX = this.Gorsel.Left - d.Gorsel.Left;
+                double farkY = this.Gorsel.Top - d.Gorsel.Top;
+                double mesafeKaresi = (farkX * farkX) + (farkY * farkY);
 
-                if (mesafe<=this.Menzil && mesafe < enKisaMesafe)
+                if (mesafeKaresi<=menzilKaresi && mesafeKaresi < enKisaMesafeKaresi)
                 {
-                    enKisaMesafe = mesafe;
+                    enKisaMesafeKaresi = mesafeKaresi;
                     enYakinDusman = d;
                 }
             }
