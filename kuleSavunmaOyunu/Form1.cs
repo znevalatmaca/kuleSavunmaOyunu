@@ -137,7 +137,7 @@ namespace kuleSavunmaOyunu
         {
             PictureBox resim = new PictureBox();
             resim.BackColor = Color.Transparent;
-            resim.Image=Properties.Resources.dusman4;
+            resim.Image=Properties.Resources.dusman6;
 
             resim.Size = new Size(40, 40);
             resim.SizeMode = PictureBoxSizeMode.StretchImage;

@@ -115,8 +115,8 @@
             // 
             // panel2
             // 
-            panel2.BackColor = Color.HotPink;
-            panel2.BackgroundImage = (Image)resources.GetObject("panel2.BackgroundImage");
+            panel2.BackColor = Color.Transparent;
+            panel2.BackgroundImage = Properties.Resources.altlabel;
             panel2.Controls.Add(btnBuyuKulesi);
             panel2.Controls.Add(btnTopKulesi);
             panel2.Controls.Add(btnOkKulesi);
@@ -170,15 +170,15 @@
             // 
             pnlYol1.BackColor = Color.DarkGray;
             pnlYol1.BackgroundImage = (Image)resources.GetObject("pnlYol1.BackgroundImage");
-            pnlYol1.Location = new Point(6, 370);
+            pnlYol1.Location = new Point(0, 370);
             pnlYol1.Name = "pnlYol1";
-            pnlYol1.Size = new Size(162, 36);
+            pnlYol1.Size = new Size(168, 36);
             pnlYol1.TabIndex = 2;
             // 
             // pnlYol3
             // 
             pnlYol3.BackColor = Color.DarkGray;
-            pnlYol3.BackgroundImage = (Image)resources.GetObject("pnlYol3.BackgroundImage");
+            pnlYol3.BackgroundImage = Properties.Resources.yol;
             pnlYol3.Location = new Point(212, 230);
             pnlYol3.Name = "pnlYol3";
             pnlYol3.Size = new Size(534, 36);
@@ -239,7 +239,7 @@
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Gray;
-            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImage = Properties.Resources.background;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1013, 651);
             Controls.Add(pnlBitis);

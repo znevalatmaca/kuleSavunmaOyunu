@@ -63,9 +63,19 @@ namespace kuleSavunmaOyunu.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap arkaplan {
+        internal static System.Drawing.Bitmap altlabel {
             get {
-                object obj = ResourceManager.GetObject("arkaplan", resourceCulture);
+                object obj = ResourceManager.GetObject("altlabel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap background {
+            get {
+                object obj = ResourceManager.GetObject("background", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,9 +113,19 @@ namespace kuleSavunmaOyunu.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap interface2 {
+        internal static System.Drawing.Bitmap dusman5 {
             get {
-                object obj = ResourceManager.GetObject("interface2", resourceCulture);
+                object obj = ResourceManager.GetObject("dusman5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap dusman6 {
+            get {
+                object obj = ResourceManager.GetObject("dusman6", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -136,6 +156,16 @@ namespace kuleSavunmaOyunu.Properties {
         internal static System.Drawing.Bitmap kule_top {
             get {
                 object obj = ResourceManager.GetObject("kule_top", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap yol {
+            get {
+                object obj = ResourceManager.GetObject("yol", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
