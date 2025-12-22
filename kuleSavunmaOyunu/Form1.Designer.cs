@@ -70,7 +70,7 @@
             lblSkor.BackColor = Color.WhiteSmoke;
             lblSkor.Font = new Font("Consolas", 13F, FontStyle.Bold);
             lblSkor.ForeColor = Color.DarkSlateBlue;
-            lblSkor.Location = new Point(766, 32);
+            lblSkor.Location = new Point(770, 32);
             lblSkor.Name = "lblSkor";
             lblSkor.Size = new Size(98, 31);
             lblSkor.TabIndex = 3;
@@ -99,7 +99,7 @@
             lblCan.Name = "lblCan";
             lblCan.Size = new Size(98, 31);
             lblCan.TabIndex = 1;
-            lblCan.Text = "Can:20";
+            lblCan.Text = "Can:10";
             // 
             // lblAltin
             // 
@@ -111,7 +111,7 @@
             lblAltin.Name = "lblAltin";
             lblAltin.Size = new Size(140, 31);
             lblAltin.TabIndex = 0;
-            lblAltin.Text = "Altın:800";
+            lblAltin.Text = "Altın:300";
             // 
             // panel2
             // 

@@ -8,6 +8,14 @@ namespace kuleSavunmaOyunu
         List<Panel> yolListesi = new List<Panel>();
         List<Dusman> dusmanlar = new List<Dusman>();
 
+        int dusmanSpawnSayaci = 0;
+        int mevcutDalga = 1;
+        int spawnSuresi = 50;
+
+        int temelDusmanCan = 50;
+        int temelDusmanHiz = 2;
+        Random rnd= new Random();
+
         int donguSayaci = 0;
         int dalgaSayisi = 0;
         int toplamDalga = 5;
@@ -15,11 +23,11 @@ namespace kuleSavunmaOyunu
 
         int dalgaSeviyesi = 1;
         int oldurulenDusmanSayisi = 0;
-        int dalgaHedefi = 5;
+        int dalgaHedefi = 3;
 
-        int oyuncuCan = 20;
+        int oyuncuCan = 10;
 
-        int oyuncuAltin = 800;
+        int oyuncuAltin = 300;
 
         string seciliKuleTuru = "";
 
@@ -51,12 +59,13 @@ namespace kuleSavunmaOyunu
         private void tmrOyun_Tick(object sender, EventArgs e)
         {
             donguSayaci++;
-         
-            
-            Random rnd = new Random();
-            if (rnd.Next(0, 100) < 2)
+
+            dusmanSpawnSayaci++;
+
+            if(dusmanSpawnSayaci>=spawnSuresi && dusmanlar.Count < 8)
             {
                 DusmanYarat();
+                dusmanSpawnSayaci = 0;
             }
 
             
@@ -71,14 +80,35 @@ namespace kuleSavunmaOyunu
                 Dusman d = dusmanlar[i]; 
                 Panel hedefYol = yolListesi[d.YolAdimi];
 
-               
+                int hedefX = (hedefYol.Left + hedefYol.Width / 2) - (d.Gorsel.Width / 2);
+                int hedefY = (hedefYol.Top + hedefYol.Height / 2) - (d.Gorsel.Height / 2);
+
+
                 if (d.Gorsel.Left < hedefYol.Left) d.Gorsel.Left += d.Hiz;
                 if (d.Gorsel.Left > hedefYol.Left) d.Gorsel.Left -= d.Hiz;
                 if (d.Gorsel.Top < hedefYol.Top) d.Gorsel.Top += d.Hiz;
                 if (d.Gorsel.Top > hedefYol.Top) d.Gorsel.Top -= d.Hiz;
 
-         
-                if (Math.Abs(d.Gorsel.Left - hedefYol.Left) < 10 && Math.Abs(d.Gorsel.Top - hedefYol.Top) < 10)
+                if (d.CanBari != null)
+                {
+                    d.CanBari.Left = d.Gorsel.Left;
+                    d.CanBari.Top = d.Gorsel.Top-10;
+                }
+
+                if (d.BaslangicCani>0)
+                {
+                    float canYuzdesi=(float)d.Can/d.BaslangicCani;
+
+                    d.CanBari.Width=(int)(d.Gorsel.Width*canYuzdesi);
+
+                    if (canYuzdesi < 0.3) d.CanBari.BackColor = Color.Red;
+                    else if (canYuzdesi < 0.6) d.CanBari.BackColor = Color.Orange;
+                    else d.CanBari.BackColor = Color.LimeGreen;
+
+                }
+               
+
+                if (Math.Abs(d.Gorsel.Left - hedefYol.Left) < 15 && Math.Abs(d.Gorsel.Top - hedefYol.Top) < 15)
                 {
                     d.YolAdimi++;
 
@@ -87,9 +117,13 @@ namespace kuleSavunmaOyunu
                     {
                         oyuncuCan -= 1;
                         if (lblCan != null) lblCan.Text = "Can: " + oyuncuCan;
+                        if (d.CanBari != null) { this.Controls.Remove(d.CanBari); d.CanBari.Dispose(); }
+                        this.Controls.Remove(d.Gorsel); d.Gorsel.Dispose();
+                        dusmanlar.RemoveAt(i);
 
-                        this.Controls.Remove(d.Gorsel); 
-                        dusmanlar.RemoveAt(i);          
+
+
+           
 
                         if (oyuncuCan <= 0)
                         {
@@ -105,20 +139,33 @@ namespace kuleSavunmaOyunu
                 if (d.Can <= 0)
                 {                  
                     oyuncuAltin += d.Odul;
-                    if (lblAltin != null) lblAltin.Text = "Altýn: " + oyuncuAltin;
-
                     oyuncuSkor += 10;
-
+                    
+                    
+                    if (lblAltin != null) lblAltin.Text = "Altýn: " + oyuncuAltin;
                     if(lblSkor!=null) lblSkor.Text="Skor: " + oyuncuSkor;
 
-                    this.Controls.Remove(d.Gorsel);             
+                    if (d.CanBari != null)
+                    {
+                        this.Controls.Remove(d.CanBari);
+                        d.CanBari.Dispose();
+                    }
+
+                    if (d.Gorsel != null)
+                    {
+                        this.Controls.Remove(d.Gorsel);
+                        d.Gorsel.Dispose();
+                    }
                     dusmanlar.RemoveAt(i);
+
                     oldurulenDusmanSayisi++;
 
                     if (oldurulenDusmanSayisi >= dalgaHedefi)
                     {
                         DalgaAtla();
                     }
+
+                   
                 }
             }
 
@@ -146,15 +193,29 @@ namespace kuleSavunmaOyunu
             resim.Top = yolListesi[0].Top;
 
             this.Controls.Add(resim);
-            resim.Parent = this;
             resim.BringToFront();
             
-            int yeniCan = 100 + (dalgaSeviyesi * 20);
+            int yeniCan = 120 + (dalgaSeviyesi * 20);
             int yeniOdul=10+ (dalgaSeviyesi * 2);
 
-           Dusman yeniDusman = new Dusman(yeniCan, 5, yeniOdul, resim);
-            dusmanlar.Add(yeniDusman);
+            int temelHiz = 3;
+            int yeniHiz = temelHiz + (dalgaSeviyesi / 2);
 
+           Dusman yeniDusman = new Dusman(yeniCan, 5, yeniOdul, resim);
+           
+
+            yeniDusman.BaslangicCani = yeniCan;
+
+            Panel bar=new Panel();
+            bar.BackColor = Color.LimeGreen;
+            bar.Size = new Size(resim.Width,5);
+
+            this.Controls.Add(bar);
+            bar.BringToFront();
+
+            yeniDusman.CanBari = bar;
+
+            dusmanlar.Add(yeniDusman);
          
             
 
@@ -252,7 +313,9 @@ namespace kuleSavunmaOyunu
             }
             dalgaSeviyesi++;
             oldurulenDusmanSayisi = 0;
-            dalgaHedefi += 5;
+            dalgaHedefi += 3;
+
+            spawnSuresi = Math.Max(10, spawnSuresi - 5);
 
             if(lblDalga!=null) lblDalga.Text="Dalga:" + dalgaSeviyesi+ "/" +toplamDalga;
 

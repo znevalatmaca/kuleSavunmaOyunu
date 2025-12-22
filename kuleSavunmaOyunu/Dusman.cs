@@ -12,6 +12,9 @@ namespace kuleSavunmaOyunu
 
         public int YolAdimi { get; set; }
 
+        public int BaslangicCani { get; set; }
+        public Panel CanBari;
+
         public Dusman(int can,int hiz,int odul, PictureBox gorsel)
         {
             this.Can = can;
